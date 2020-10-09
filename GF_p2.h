@@ -137,7 +137,7 @@ public:
         return str;
     }
 
-    GF_p2 power(int n) {
+    GF_p2 power(int n) const{
         int C;
         int a = 0; int b = 0;
         for (int k = n; k >= 0; k--) {
@@ -155,8 +155,8 @@ public:
                     b = (b += (powermod(v[0], k, m, false) * powermod(v[1], n - k, m, false) * C * (k / 2) * r)) % m;
             }
         }
-        v[0] = a; v[1] = b;
-        return *this;
+        GF_p2 u; u.setVector(a, b);
+        return u;
     }
 };
 
