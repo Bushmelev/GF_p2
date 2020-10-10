@@ -99,18 +99,25 @@ public:
         v[1] = (a * c * r + b * d) % m;
         return *this;
     }
-
+    /*
     bool operator==(const GF_p2& k) const {
-        int a, b;
-        if ((v[0] < 0) | (v[1] < 0)) {
+        int a, b, c, d;
+        if ((v[0] < 0) | (v[1] < 0) | (k.v[0] < 0) | (k.v[1] < 0) ) {
             a = (v[0] + m) % m;
             b = (v[1] + m) % m;
+            c = (k.v[0] + m) % m;
+            d = (k.v[1] + m) % m;
         }
         else {
             a = v[0];
             b = v[1];
+            c = k.v[0];
+            d = k.v[1];
         }
-        return ((a == k.v[0]) & (b == k.v[1]));
+        return ((a == c) & (b == d));
+    }*/
+    bool operator==(const GF_p2& k) const {
+        return ((((v[0] + m) % m) == ((k.v[0] + m) % m)) & (((v[1] + m) % m) == ((k.v[1] + m) % m)));
     }
 
     bool operator!=(const GF_p2& k) const {
